@@ -63,7 +63,7 @@ export class FabricGateway {
 		this.fabricCaEnabled = this.fabricConfig.isFabricCaEnabled();
 		this.tlsEnable = this.fabricConfig.getTls();
 		this.enableAuthentication = this.fabricConfig.getEnableAuthentication();
-		this.FSWALLET = 'wallet/' + this.fabricConfig.getNetworkId();
+		this.FSWALLET = '/qdata/blockchain-explorer/wallets/' + this.fabricConfig.getNetworkId();
 
 		const explorerAdminId = this.fabricConfig.getAdminUser();
 		if (!explorerAdminId) {

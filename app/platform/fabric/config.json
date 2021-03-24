@@ -1,8 +1,9 @@
 {
-	"network-configs": {
-		"test-network": {
-			"name": "Test Network",
-			"profile": "./connection-profile/test-network.json"
+	"network-configs": { 
+		"kaleido": { 
+			"name": "kaleido", 
+			"profile": "/qdata/blockchain-explorer/profile.json",
+			"enableAuthentication": false
 		}
 	},
 	"license": "Apache-2.0"

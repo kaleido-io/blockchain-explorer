@@ -564,7 +564,7 @@ export class HeaderView extends Component {
 										/>
 										<FontAwesome name="moon-o" className={classes.moonIcon} />
 									</div>
-									<div className={classNames(classes.adminButton, classes.user)}>
+									{/* <div className={classNames(classes.adminButton, classes.user)}>
 										<FontAwesome
 											name="user-plus"
 											className={classes.userIcon}
@@ -577,7 +577,7 @@ export class HeaderView extends Component {
 											className={classes.logout}
 											onClick={() => this.logout()}
 										/>
-									</div>
+									</div> */}
 								</Nav>
 							</Collapse>
 						</Navbar>

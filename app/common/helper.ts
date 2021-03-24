@@ -44,9 +44,9 @@ export class helper {
 	static getLogger(moduleName: string): any {
 		const logger = log4js.getLogger(moduleName);
 
-		let appLog = 'logs/app/app.log';
-		let dbLog = 'logs/db/db.log';
-		let consoleLog = 'logs/console/console.log';
+		let appLog = '/qdata/blockchain-explorer/logs/app/app.log';
+		let dbLog = '/qdata/blockchain-explorer/logs/db/db.log';
+		let consoleLog = '/qdata/blockchain-explorer/logs/console/console.log';
 
 		if (process.env.SYNC_LOG_PATH) {
 			appLog = `${process.env.SYNC_LOG_PATH}/app/app.log`;
