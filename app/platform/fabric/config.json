@@ -2,7 +2,7 @@
 	"network-configs": { 
 		"kaleido": { 
 			"name": "kaleido", 
-			"profile": "/qdata/blockchain-explorer/profile.json",
+			"profile": "/qdata/fabric-explorer/profile.json",
 			"enableAuthentication": false
 		}
 	},
