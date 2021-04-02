@@ -63,7 +63,8 @@ export class FabricGateway {
 		this.fabricCaEnabled = this.fabricConfig.isFabricCaEnabled();
 		this.tlsEnable = this.fabricConfig.getTls();
 		this.enableAuthentication = this.fabricConfig.getEnableAuthentication();
-		this.FSWALLET = '/qdata/fabric-explorer/wallets/' + this.fabricConfig.getNetworkId();
+		this.FSWALLET =
+			'/qdata/fabric-explorer/wallets/' + this.fabricConfig.getNetworkId();
 
 		const explorerAdminId = this.fabricConfig.getAdminUser();
 		if (!explorerAdminId) {
@@ -77,7 +78,7 @@ export class FabricGateway {
 		this.defaultChannelName = this.fabricConfig.getDefaultChannel();
 		try {
 			// Create a new file system based wallet for managing identities.
-			const walletPath = path.join(process.cwd(), this.FSWALLET);
+			const walletPath = this.FSWALLET;
 			this.wallet = await Wallets.newFileSystemWallet(walletPath);
 			// Check to see if we've already enrolled the admin user.
 			const identity = await this.wallet.get(explorerAdminId);
