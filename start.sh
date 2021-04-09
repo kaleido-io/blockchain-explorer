@@ -24,4 +24,11 @@ echo "Waiting for config file"
 while [ ! -f /qdata/fabric-explorer/profile.json ]; do sleep 1; done
 echo "Config file found"
 
+until pg_isready -h localhost -p 5432 -U postgres
+do
+  echo "Waiting for Postgres"
+  sleep 2;
+done
+echo "Postgres is ready"
+
 node ${EXPLORER_APP_ROOT}/main.js name - hyperledger-explorer &
