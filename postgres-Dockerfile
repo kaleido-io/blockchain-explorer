@@ -5,6 +5,15 @@
 
 FROM postgres:10.4-alpine
 
+# grant the permissions on our PGDATA dir
+RUN set -eux; \
+	mkdir -p /qdata/fabric-explorer/postgresql; \
+	chown -R postgres:postgres /qdata/fabric-explorer/postgresql
+
+ENV PGDATA /qdata/fabric-explorer/postgresql/data
+RUN mkdir -p "$PGDATA" && chown -R postgres:postgres "$PGDATA" && chmod 777 "$PGDATA"
+VOLUME /qdata/fabric-explorer/postgresql/data
+
 # default database name for HLF Explorer db connection
 ENV DATABASE_DATABASE 	fabricexplorer
 
