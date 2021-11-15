@@ -63,7 +63,8 @@ export class FabricGateway {
 		this.fabricCaEnabled = this.fabricConfig.isFabricCaEnabled();
 		this.tlsEnable = this.fabricConfig.getTls();
 		this.enableAuthentication = this.fabricConfig.getEnableAuthentication();
-		this.FSWALLET = 'wallet/' + this.fabricConfig.getNetworkId();
+		this.FSWALLET =
+			'/qdata/fabric-explorer/wallets/' + this.fabricConfig.getNetworkId(); // eslint-disable-line
 
 		const explorerAdminId = this.fabricConfig.getAdminUser();
 		if (!explorerAdminId) {
@@ -77,7 +78,7 @@ export class FabricGateway {
 		this.defaultChannelName = this.fabricConfig.getDefaultChannel();
 		try {
 			// Create a new file system based wallet for managing identities.
-			const walletPath = path.join(process.cwd(), this.FSWALLET);
+			const walletPath = this.FSWALLET;
 			this.wallet = await Wallets.newFileSystemWallet(walletPath);
 			// Check to see if we've already enrolled the admin user.
 			const identity = await this.wallet.get(explorerAdminId);
@@ -433,25 +434,22 @@ export class FabricGateway {
 				this.waitingResp = true;
 				logger.info('Sending discovery request...');
 				await this.ds
-          .send({
-            asLocalhost: this.asLocalhost,
-            requestTimeout: 5000,
-            refreshAge: 15000,
-            targets: this.dsTargets,
-          })
-          .then(() => {
-            logger.info('Succeeded to send discovery request');
-          })
-          .catch(error => {
-            if (error) {
-              logger.warn(
-                'Failed to send discovery request for channel',
-                error,
-              );
-              this.waitingResp = false;
-              this.ds.close();
-            }
-          });
+					.send({
+						asLocalhost: this.asLocalhost,
+						requestTimeout: 5000,
+						refreshAge: 15000,
+						targets: this.dsTargets
+					})
+					.then(() => {
+						logger.info('Succeeded to send discovery request');
+					})
+					.catch(error => {
+						if (error) {
+							logger.warn('Failed to send discovery request for channel', error);
+							this.waitingResp = false;
+							this.ds.close();
+						}
+					});
 			} else {
 				logger.info('Have already been sending a request');
 				return null;

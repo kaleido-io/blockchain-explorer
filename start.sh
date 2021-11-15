@@ -20,4 +20,15 @@ export LOG_CONSOLE_STDOUT=${LOG_CONSOLE_STDOUT:-false}
 export DISCOVERY_AS_LOCALHOST=${DISCOVERY_AS_LOCALHOST:-true}
 export EXPLORER_APP_ROOT=${EXPLORER_APP_ROOT:-dist}
 
-node ${EXPLORER_APP_ROOT}/main.js name - hyperledger-explorer
+echo "Waiting for config file"
+while [ ! -f /qdata/fabric-explorer/profile.json ]; do sleep 1; done
+echo "Config file found"
+
+until pg_isready -h $DATABASE_HOST -p $DATABASE_PORT -U postgres
+do
+  echo "Waiting for Postgres"
+  sleep 2;
+done
+echo "Postgres is ready"
+
+node ${EXPLORER_APP_ROOT}/main.js name - hyperledger-explorer &

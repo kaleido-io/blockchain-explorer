@@ -7,7 +7,7 @@
 # Please visit ./logs/sync/app to view the application logs and visit the ./logs/sync/db to view the Database logs and visit the ./logs/sync/console for the console.log
 # Log rotating for every 7 days.
 
-export SYNC_LOG_PATH=./logs/sync
+export SYNC_LOG_PATH=/qdata/logs/fabric-explorer/sync
 
 echo "************************************************************************************"
 echo "**************************** Hyperledger Explorer Sync**********************************"

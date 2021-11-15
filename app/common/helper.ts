@@ -44,9 +44,9 @@ export class helper {
 	static getLogger(moduleName: string): any {
 		const logger = log4js.getLogger(moduleName);
 
-		let appLog = 'logs/app/app.log';
-		let dbLog = 'logs/db/db.log';
-		let consoleLog = 'logs/console/console.log';
+		let appLog = '/qdata/logs/fabric-explorer/app/app.log'; // eslint-disable-line
+		let dbLog = '/qdata/logs/fabric-explorer/db/db.log'; // eslint-disable-line
+		let consoleLog = '/qdata/logs/fabric-explorer/console/console.log'; // eslint-disable-line
 
 		if (process.env.SYNC_LOG_PATH) {
 			appLog = `${process.env.SYNC_LOG_PATH}/app/app.log`;
