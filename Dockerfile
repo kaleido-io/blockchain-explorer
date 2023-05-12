@@ -25,7 +25,7 @@ RUN apk add --no-cache --virtual npm-deps python3 make g++ curl bash && \
     rm -r /root/.cache
 
 # install node-prune (https://github.com/tj/node-prune)
-RUN curl -sfL https://install.goreleaser.com/github.com/tj/node-prune.sh | bash -s -- -b /usr/local/bin
+RUN npm install -g node-prune
 
 # install NPM dependencies
 RUN npm install && npm run build && npm prune --production
@@ -34,8 +34,8 @@ RUN npm install && npm run build && npm prune --production
 RUN cd client && npm install && npm prune --production && yarn build
 
 # remove installed packages to free space
+RUN node-prune
 RUN apk del npm-deps
-RUN /usr/local/bin/node-prune
 
 RUN rm -rf node_modules/rxjs/src/
 RUN rm -rf node_modules/rxjs/bundles/
