@@ -31,4 +31,4 @@ do
 done
 echo "Postgres is ready"
 
-node ${EXPLORER_APP_ROOT}/main.js name - hyperledger-explorer &
+node ${EXPLORER_APP_ROOT}/main.js name - hyperledger-explorer
