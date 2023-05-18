@@ -3,7 +3,7 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-FROM node:14-alpine AS BUILD_IMAGE
+FROM node:13-alpine AS BUILD_IMAGE
 
 # default values pf environment variables
 # that are used inside container
