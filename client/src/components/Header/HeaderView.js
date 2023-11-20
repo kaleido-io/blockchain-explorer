@@ -617,7 +617,7 @@ export class HeaderView extends Component {
 														<FontAwesome name="moon-o" className={classes.moonIcon} />
 													</div>
 												</DropdownItem>
-												<DropdownItem>
+												{/*<DropdownItem>
 													<div
 														className={classes.userIcon}
 														onClick={() => this.registerOpen()}
@@ -631,7 +631,7 @@ export class HeaderView extends Component {
 													<div className={classes.logoutIcon} onClick={() => this.logout()}>
 														<FontAwesome name="sign-out" /> Sign out
 													</div>
-												</DropdownItem>
+												</DropdownItem>*/}
 											</DropdownMenu>
 										</Dropdown>
 									</Form>

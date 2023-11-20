@@ -44,6 +44,8 @@ RUN rm -rf node_modules/grpc/deps/grpc/third_party/
 
 FROM node:13-alpine
 
+RUN apk add postgresql-client
+
 # database configuration
 ENV DATABASE_HOST 127.0.0.1
 ENV DATABASE_PORT 5432
