@@ -19,6 +19,7 @@ export const fabric = {
 	}
 };
 
+// eslint-disable-next-line no-shadow
 export enum BootModes {
 	'ALL',
 	'CUSTOM'
