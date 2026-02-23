@@ -530,4 +530,69 @@ export class FabricGateway {
 		logger.debug('queryContractMetadata', metadata);
 		return metadata;
 	}
+
+	async queryBlockByTxId(channelName, txnId) {
+		try {
+			const network = await this.gateway.getNetwork(channelName);
+			const contract = network.getContract('qscc');
+			const resultByte = await contract.evaluateTransaction(
+				'GetBlockByTxID',
+				channelName,
+				txnId
+			);
+			const resultJson = BlockDecoder.decode(resultByte);
+			logger.debug('queryBlockByTxnId', resultJson);
+			return resultJson;
+		} catch (error) {
+			logger.error(
+				`Failed to get Block ${txnId} from channel ${channelName} : `,
+				error
+			);
+			return null;
+		}
+	}
+	async queryBlockByHash(channelName, block_hash) {
+		try {
+			const network = await this.gateway.getNetwork(channelName);
+			const contract = network.getContract('qscc');
+			const resultByte = await contract.evaluateTransaction(
+				'GetBlockByHash',
+				channelName,
+				Buffer.from(block_hash, 'hex')
+			);
+			const resultJson = BlockDecoder.decode(resultByte);
+			logger.debug('queryBlockByHash', resultJson);
+			return resultJson;
+		} catch (error) {
+			logger.error(
+				`Failed to get Block ${block_hash} from channel ${channelName} : `,
+				error
+			);
+			return null;
+		}
+	}
+
+	async queryEndorsersCommitter(channelName) {
+		try {
+			const network = await this.gateway.getNetwork(channelName);
+			const channel = network.getChannel();
+
+			const eventService = channel.newEventService('listener');
+			let endorsers = [];
+			let committers = [];
+			for (const element of eventService.channel.committers.keys()) {
+				committers.push(element);
+			}
+			for (const element of eventService.channel.endorsers.keys()) {
+				endorsers.push(element);
+			}
+			return { committers: committers, endorsers: endorsers };
+		} catch (error) {
+			logger.error(
+				`Failed to get Committers and Endorsers from channel ${channelName} : `,
+				error
+			);
+			return null;
+		}
+	}
 }
