@@ -585,5 +585,4 @@ export class PgService {
 			});
 		});
 	}
-	
 }

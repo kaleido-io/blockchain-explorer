@@ -145,18 +145,17 @@ export function dbroutes(router: Router, platform: Platform) {
 			}
 			if (channel_genesis_hash) {
 				const extReq = (req as unknown) as ExtRequest;
-				let data = await dbCrudService
-					.getTxList(
-						extReq.network,
-						channel_genesis_hash,
-						blockNum,
-						txid,
-						from,
-						to,
-						orgs,
-						page,
-						size
-					)
+				const data = await dbCrudService.getTxList(
+					extReq.network,
+					channel_genesis_hash,
+					blockNum,
+					txid,
+					from,
+					to,
+					orgs,
+					page,
+					size
+				);
 				if (data) {
 					return res.send({
 						status: 200,
@@ -164,9 +163,8 @@ export function dbroutes(router: Router, platform: Platform) {
 					});
 				}
 				return requtil.notFound(req, res);
-			} else {
-				return requtil.invalidRequest(req, res);
 			}
+			return requtil.invalidRequest(req, res);
 		}
 	);
 
@@ -253,9 +251,9 @@ export function dbroutes(router: Router, platform: Platform) {
 				req.query.to as string
 			);
 			const { page, size } = req.query;
-			if (channel_genesis_hash ) {
+			if (channel_genesis_hash) {
 				const extReq = (req as unknown) as ExtRequest;
-				let data = await dbCrudService.getBlockAndTxList(
+				const data = await dbCrudService.getBlockAndTxList(
 					extReq.network,
 					channel_genesis_hash,
 					blockNum,
@@ -272,9 +270,8 @@ export function dbroutes(router: Router, platform: Platform) {
 					});
 				}
 				return requtil.notFound(req, res);
-			} else {
-				return requtil.invalidRequest(req, res);
 			}
+			return requtil.invalidRequest(req, res);
 		}
 	);
 

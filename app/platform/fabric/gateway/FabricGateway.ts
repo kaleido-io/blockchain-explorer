@@ -480,11 +480,11 @@ export class FabricGateway {
 
 	async getActiveOrderersList(channel_name) {
 		const network = await this.gateway.getNetwork(channel_name);
-		let orderers = [];
+		const orderers = [];
 		try {
-			for (let [orderer, ordererMetadata] of network.discoveryService.channel
+			for (const [orderer, ordererMetadata] of network.discoveryService.channel
 				.committers) {
-				let ordererAtrributes = {
+				const ordererAtrributes = {
 					name: orderer,
 					connected: ordererMetadata.connected
 				};
@@ -492,7 +492,7 @@ export class FabricGateway {
 			}
 			return orderers;
 		} catch (error) {
-			logger.error(`Failed to get orderers list : `, error);
+			logger.error('Failed to get orderers list : ', error);
 			return orderers;
 		}
 	}
@@ -578,8 +578,8 @@ export class FabricGateway {
 			const channel = network.getChannel();
 
 			const eventService = channel.newEventService('listener');
-			let endorsers = [];
-			let committers = [];
+			const endorsers = [];
+			const committers = [];
 			for (const element of eventService.channel.committers.keys()) {
 				committers.push(element);
 			}

@@ -32,6 +32,16 @@ do
 done
 echo "Postgres is ready"
 
+echo "Running database migrations..."
+PGPASSWORD=${DATABASE_PASSWD} psql \
+  -h ${DATABASE_HOST} \
+  -p ${DATABASE_PORT:-5432} \
+  -U ${DATABASE_USERNAME} \
+  -d ${DATABASE_DATABASE:-fabricexplorer} \
+  -v dbname=${DATABASE_DATABASE:-fabricexplorer} \
+  -f app/persistence/fabric/postgreSQL/db/updatepg.sql
+echo "Database migrations complete"
+
 log_exit() {
   echo "Server stopped"
   exit
