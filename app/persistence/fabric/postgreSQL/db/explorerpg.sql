@@ -255,4 +255,13 @@ DROP INDEX IF EXISTS channel_channel_hash_idx;
 CREATE INDEX ON channel
 (channel_hash);
 
+DROP INDEX IF EXISTS blocks_network_name_channel_genesis_hash_idx;
+CREATE INDEX blocks_network_name_channel_genesis_hash_idx ON public.blocks (network_name, channel_genesis_hash);
+
+DROP INDEX IF EXISTS blocks_network_name_channel_createdt_idx;
+CREATE INDEX blocks_network_name_channel_createdt_idx ON public.blocks (network_name, channel_genesis_hash, createdt DESC);
+
+DROP INDEX IF EXISTS blocks_network_name_channel_blocknum_idx;
+CREATE INDEX blocks_network_name_channel_blocknum_idx ON public.blocks (network_name, channel_genesis_hash, blocknum);
+
 GRANT SELECT, INSERT, UPDATE,DELETE ON ALL TABLES IN SCHEMA PUBLIC to :user;

@@ -49,7 +49,7 @@ const shutDown = function() {
 	}, 2000);
 };
 
-process.on('unhandledRejection', (up : {message : string}) => {
+process.on('unhandledRejection', (up: { message: string }) => {
 	logger.error(
 		'<<<<<<<<<<<<<<<<<<<<<<<<<< Synchronizer Error >>>>>>>>>>>>>>>>>>>>>'
 	);
@@ -58,10 +58,13 @@ process.on('unhandledRejection', (up : {message : string}) => {
 	} else {
 		logger.error(up);
 	}
-  // prevent timeout error from calling shutdown
-	if (!up.message.includes('REQUEST TIMEOUT') && !up.message.includes('ETIMEOUT')) {
-    shutDown();
-  }
+	// prevent timeout error from calling shutdown
+	if (
+		!up.message.includes('REQUEST TIMEOUT') &&
+		!up.message.includes('ETIMEOUT')
+	) {
+		shutDown();
+	}
 });
 process.on('uncaughtException', up => {
 	logger.error(
